@@ -1,0 +1,66 @@
+<div class="container">
+    <form>
+        <div class="form-group row">
+            <label for="radius-input" class="col-md-2 col-form-label">Bán kính:</label>
+            <div class="col-md-6">
+                <input type="number" class="form-control" id="radius-input" name="radius" placeholder="Nhập bán kính">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="offset-md-2 col-md-6">
+                <button type="button" class="btn btn-primary" onclick="drawCircleArea()">Vẽ hình tròn</button>
+            </div>
+        </div>
+    </form>
+    <div class="circle-result">
+        <p id="area-result"></p>
+        <canvas id="myCanvas"></canvas>
+    </div>
+
+</div>
+
+<script>
+    async function postData(url = "", data = {}) {
+        const response = await fetch(url, {
+            method: "POST",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            redirect: "follow",
+            referrerPolicy: "no-referrer",
+            body: JSON.stringify(data),
+        });
+        return response.json();
+    }
+
+    function drawCircleArea() {
+        const radius = document.getElementById('radius-input').value;
+        const apiUrl = `http://localhost:3000/area/circle?&a=${radius}`;
+        fetch(apiUrl)
+            .then((response) => response.json())
+            .then((data) => {
+                const canvas = document.getElementById('myCanvas');
+                const context = canvas.getContext('2d');
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.beginPath();
+                context.arc(centerX, centerY, radius, 0, data.area);
+                context.fill();
+                const areaResult = document.getElementById('area-result');
+                areaResult.innerText = `Diện tích: ${data.area}`;
+            });
+    }
+
+    function drawCirclePerimeter() {
+        const radius = document.getElementById('radius-input').value;
+        const apiUrl = `http://localhost:3000/perimeter/`;
+        postData(url = apiUrl, { shape: 'circle', a: radius }).then((data) => {
+            const areaResult = document.getElementById('area-result');
+            areaResult.innerText = `Diện tích: ${data.area}`;
+        });
+    }
+</script>
