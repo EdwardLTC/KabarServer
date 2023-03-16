@@ -28,7 +28,6 @@ class MediaController extends Controller {
         },
         'filename': function (req, file, cb) {
             const fileOriginalName = utils.slugify(file.originalname);
-
             cb(null, `${(new Date()).getTime()}-${fileOriginalName}`);
         }
     });
@@ -73,7 +72,6 @@ class MediaController extends Controller {
 
     async delete(req, res, next) {
         const { id } = req.params;
-
         try {
             const response = await this.service.delete(id);
             // File Unlinking..

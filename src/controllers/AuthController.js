@@ -9,7 +9,6 @@ const bcrypt = require('bcrypt'),
     );
 
 class AuthController {
-
     constructor(service) {
         this.service = service;
         autoBind(this);
@@ -18,13 +17,11 @@ class AuthController {
     async login(req, res, next) {
         try {
             const response = await this.service.login(req.body.email, req.body.password);
-
             await res.status(response.statusCode).json(response);
         } catch (e) {
             next(e);
         }
     }
-
 
     async logout(req, res, next) {
         try {
@@ -38,7 +35,6 @@ class AuthController {
     async checkLogin(req, res, next) {
         try {
             const token = this.extractToken(req);
-
             req.user = await this.service.checkLogin(token);
             req.authorized = true;
             req.token = token;

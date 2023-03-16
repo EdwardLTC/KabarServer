@@ -14,7 +14,6 @@ class ArticleController extends Controller {
         try {
             const { _id } = req.user;
             const response = await this.service.getByAuthor(_id);
-
             return await res.status(response.statusCode).json(response);
         } catch (e) {
             next(e);
@@ -24,7 +23,6 @@ class ArticleController extends Controller {
         try {
             const { title } = req.query;
             const response = await this.service.getByTitle(title);
-
             return await res.status(response.statusCode).json(response);
         } catch (e) {
             next(e);

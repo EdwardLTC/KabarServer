@@ -26,7 +26,7 @@ const { setRoutes } = require('./routes');
 server.use(logger('dev'));
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
-server.set('views', path.join(__dirname, '../src/views'));
+server.set('views', path.join(__dirname, '../views'));
 server.set('view engine', 'hbs');
 server.use(cookieParser());
 server.use(express.static(path.join(__dirname, '../public')));

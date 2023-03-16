@@ -1,40 +1,31 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+require('dotenv').config();
+// Initialize DB Connection
+require('./config/database');
+require('./config/caching');
 
-var indexRouter = require('../server/src/routes/index');
+// attention, reload cache each restart, every midnight
+// require('./config/cache').start();
 
-var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+const config = require('./config/config').getConfig(),
+  PORT = config.PORT;
+// const { socket } = require('./config/socket');
+const http = require('http');
+console.log('✔ Bootstrapping Application');
+console.log(`✔ Mode: ${config.MODE}`);
+console.log(`✔ Port: ${PORT}`);
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+const { server: app } = require('./config/server');
+const server = http.createServer(app);
 
-//http://localhost/
-app.use('/', indexRouter);
-
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
+server.listen(PORT).on('error', (err) => {
+  console.log('✘ Application failed to start');
+  console.error('✘', err.message);
+  process.exit(0);
+}).on('listening', () => {
+  console.log('✔ Application Started');
 });
 
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+// socket.io.attach(server);
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
-
-module.exports = app;
+module.exports = { server };
