@@ -7,10 +7,6 @@ router.post('/login', AuthController.login);
 
 router.get('/logout', AuthController.checkLogin, AuthController.logout);
 
-router.get('/login', (req, res) => {
-    res.render('login');
-});
-
 
 
 
