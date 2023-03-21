@@ -185,8 +185,8 @@ function updateLineChart() {
 }
 
 function updateBarChart() {
-  if (barChart) {
-    barChart.options = optionsBar;
-    barChart.update();
-  }
+  // if (barChart) {
+  //   barChart.options = optionsBar;
+  //   barChart.update();
+  // }
 }

@@ -6,16 +6,12 @@ router.get("/login", (req, res) => {
   res.render("login");
 });
 
-router.get("/", (req, res) => {
-  res.render("index");
-});
-
 //http://localhost:3000/cpanel/auth/login-request
 router.post("/login-request", async (req, res, next) => {
   try {
     const { username, password } = req.body;
     if (username && password) {
-      res.redirect("/cpanel/auth");
+      res.redirect("/cpanel/homes");
     } else {
       res.redirect("login");
     }

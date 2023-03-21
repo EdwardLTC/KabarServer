@@ -11,9 +11,7 @@ const fs = require("fs");
 const { HttpError } = require("../helpers/HttpError");
 const packageJson = require("../../package.json"),
   routesPath = path.resolve(`${__dirname}/../../src/routes/api`),
-  cpnaelsPath = path.resolve(`${__dirname}/../../src/routes/cpanel`),
   PATHS = fs.readdirSync(routesPath),
-  CPANELS = fs.readdirSync(cpnaelsPath),
   moduleMapper = [];
 
 console.log("✔ Mapping API routes");
@@ -30,25 +28,20 @@ PATHS.forEach((module) => {
     });
   }
 });
-
-CPANELS.forEach((module) => {
-  if (module !== "index.js") {
-    const name = module.split(".")[0];
-    router.use(
-      `/${pluralize.plural(name)}`,
-      require(path.resolve(cpnaelsPath, module))
-    );
-    moduleMapper.push({
-      Module: name,
-      Route: `/${pluralize.plural(name)}`,
-    });
-  }
-});
-
 console.table(moduleMapper);
 
-router.get('/', (req, res) => {
-    res.json({ 'status': true, 'message': `Welcome to ${packageJson.name} V ${packageJson.version}` });
+router.get("/", (req, res) => {
+  // //res.json({ 'status': true, 'message': `Welcome to ${packageJson.name} V ${packageJson.version}` });
+  // const arr = Array.from({ length: 5 }, (_, index) => ({
+  //   ORDER: index.toString(),
+  //   STATUS: "HAHA",
+  //   OPERATORS: "Oliver Trag",
+  //   LOCATION: "London, UK",
+  //   DISTANCE: "485 km",
+  //   START_DATE: new Date(),
+  //   EST_DELIVERY_DUE: new Date(),
+  // }));
+  // res.render("index", { list: arr });
 });
 
 router.use("*", (req, res, next) => {
@@ -67,4 +60,5 @@ router.use((err, req, res, next) => {
   res.json(error);
   next();
 });
+
 module.exports = router;
