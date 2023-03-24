@@ -111,13 +111,12 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">ORDER NO.</th>
-                  <th scope="col">STATUS</th>
-                  <th scope="col">OPERATORS</th>
-                  <th scope="col">LOCATION</th>
-                  <th scope="col">DISTANCE</th>
-                  <th scope="col">START DATE</th>
-                  <th scope="col">Tools</th>
+                  <th scope="col">ARTICLE_ID</th>
+                  <th scope="col">TITLE</th>
+                  <th scope="col">IMAGE</th>
+                  <th scope="col">CREATE_AT</th>
+                  <th scope="col">CREATE_BY</th>
+                  <th scope="col">TOOLS</th>
                 </tr>
               </thead>
               <tbody>
@@ -125,16 +124,15 @@
                 {{#each list}}
 
                 <tr>
-                  <th scope="row"><b>{{this.ORDER}}</b></th>
+                  <th scope="row"><b>{{this._id}}</b></th>
                   <td>
                     <div class="tm-status-circle moving">
-                    </div>{{this.STATUS}}
+                    </div>{{this.title}}
                   </td>
-                  <td><b>{{this.OPERATORS}}</b></td>
-                  <td><b>{{this.LOCATION}}</b></td>
-                  <td><b>{{this.DISTANCE}}</b></td>
-                  <td>{{this.START_DATE}}</td>
-                  <td><a class="font-weight" onclick="confirmDelete('{{this.ORDER}}')">DELETE</a></td>
+                  <td><b>{{this.image}}</b></td>
+                  <td><b>{{this.createdAt}}</b></td>
+                  <td><b>{{this.createdBy}}</b></td>
+                  <td><a class="font-weight" onclick="confirmDelete('{{this._id}}')">DELETE</a></td>
                 </tr>
                 
                {{/each}}
@@ -145,24 +143,6 @@
       </div>
     </div>
   </div>
-
-  <script src="js/jquery-3.3.1.min.js"></script>
-  <!-- https://jquery.com/download/ -->
-  <script src="js/moment.min.js"></script>
-  <!-- https://momentjs.com/ -->
-  <script src="js/Chart.min.js"></script>
-  <!-- http://www.chartjs.org/docs/latest/ -->
-  <script src="js/bootstrap.min.js"></script>
-  <!-- https://getbootstrap.com/ -->;
-  <script src="js/tooplate-scripts.js"></script>
-  <script>
-    Chart.defaults.global.defaultFontColor = 'white'; let ctxLine, ctxBar,
-    ctxPie, optionsLine, optionsBar, optionsPie, configLine, configBar,
-    configPie, lineChart;// DOM is ready $(function () {
-    drawLineChart(); // Line Chart drawBarChart(); // Bar Chart drawPieChart();
-    // Pie Chart $(window).resize(function () { updateLineChart();
-    updateBarChart();
-  </script>
 
   <script>
     const fetchAPI = async (url, option) => {
@@ -179,7 +159,7 @@
         try {
             const res = await fetchAPI(url, option);
             console.log(res)
-            if (res.result) {
+            if (res.response) {
                 swal("Thành công!", "Xóa sản phẩm thành công!", "success");
                 setTimeout(() => { window.location.reload(); }, 1000);
             } else {

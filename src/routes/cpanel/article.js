@@ -1,15 +1,14 @@
 const express = require("express");
 const router = express.Router();
+const ArticleController = require("../../controllers/ArticleController");
 
 //http://localhost:3000/cpanel/article/{id}/delete
-router.delete("/:order/delete", async (req, res, next) => {
+router.delete("/:id/delete", async (req, res, next) => {
   try {
-    const { order } = req.params;
-    if (order) {
-      res.json({ order });
-    }
+    const response = await ArticleController.delete(req);
+    return res.json({ response });
   } catch (error) {
-    res.json("ngu");
+    return res.json({ response: false });
   }
 });
 

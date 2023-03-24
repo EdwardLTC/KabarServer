@@ -1,18 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const ArticleController = require("../../controllers/ArticleController");
 
 //http://localhost:3000/cpanel/homes
-router.get("/", (req, res) => {
-  const arr = Array.from({ length: 5 }, (_, index) => ({
-    ORDER: index.toString(),
-    STATUS: "HAHA",
-    OPERATORS: "Oliver Trag",
-    LOCATION: "London, UK",
-    DISTANCE: "485 km",
-    START_DATE: new Date(),
-    EST_DELIVERY_DUE: new Date(),
-  }));
-  res.render("index", { list: arr });
+router.get("/", async (req, res, next) => {
+  const Articles = await ArticleController.getAll();
+  res.render("index", { list: Articles.data });
 });
 
 module.exports = router;
