@@ -9,9 +9,7 @@ router.get("/", ArticleController.getAll);
 
 router.delete("/:id/delete", ArticleController.delete);
 
-router.get("/add-article", async (req, res, next) => {
-  res.render("add-article");
-});
+router.get("/add-article", ArticleController.addArticleScreen);
 
 router.post("/add-article",[UploadImage.single("image")],ArticleController.insert);
 

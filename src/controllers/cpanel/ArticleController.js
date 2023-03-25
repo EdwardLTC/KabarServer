@@ -11,6 +11,15 @@ class ArticleController extends Controller {
     autoBind(this);
   }
 
+  async addArticleScreen(req, res, next) {
+    try {
+      res.render("add-article");
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  
   async getByAuthor(req, res, next) {
     try {
       const { _id } = req.user;

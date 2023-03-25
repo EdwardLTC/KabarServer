@@ -15,6 +15,14 @@ class AuthController {
     autoBind(this);
   }
 
+  async loginScreen(req, res, next) {
+    try {
+      res.render("login");
+    } catch (e) {
+      next(e);
+    }
+  }
+
   async login(req, res, next) {
     try {
       const response = await this.service.login(
