@@ -75,7 +75,7 @@
               </div>
             </div>
             {{!-- {{article}} --}}
-            <form action="/cpanel/articles/{{article._id}}/update" class="tm-edit-product-form" method="PUT"
+            <form action="/cpanel/articles/{{article._id}}/update" class="tm-edit-product-form" method="post"
               enctype="multipart/form-data">
               <div class="row tm-edit-product-row">
                 <div class="col-xl-6 col-lg-6 col-md-12">
@@ -99,7 +99,7 @@
                     <div class="form-group mb-3 col-xs-12 col-sm-6">
                       <label for="stock">Create By
                       </label>
-                      <input id="stock" name="stock" type="text" class="form-control validate"
+                      <input id="stock" name="createdBy" type="text" class="form-control validate"
                         value="{{article.createdBy}}" />
                     </div>
                   </div>
@@ -107,13 +107,15 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 mx-auto mb-4">
                   <div class="tm-product-img-dummy mx-auto" style="overflow: hidden;">
                     <i style="position: absolute;" id="icon"
-                      onclick="document.getElementById('fileInput').click();"></i>
-                    <image id="img" style="width: 100%;height:100%; object-fit:contain" src="{{article.image}}" />
+                      onclick="document.getElementById('fileInput').click();">
+                      </i>
+                    <image id="img" style="width: 100%;height:100%; object-fit:contain"
+                      src="{{article.image}}" />
                   </div>
                   <div class="custom-file mt-3 mb-3">
                     <label for="fileInput" class="btn btn-primary btn-block mx-auto">UPLOAD ARTICLE IMAGE</label>
                     <input id="fileInput" type="file" class="btn btn-primary btn-block mx-auto"
-                      value="UPLOAD ARTICLE IMAGE" name="image" style="visibility:hidden;" />
+                       name="image" style="visibility:hidden;" />
                   </div>
                 </div>
                 <div class="col-12">

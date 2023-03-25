@@ -34,9 +34,7 @@ class ArticleController extends Controller {
   async getById(req, res, next) {
     try {
       const { id } = req.params;
-      console.log("id", id)
       const response = await this.service.getById(id);
-      console.log("response", response.data);
       return res.render("detail-article", { article: response.data });
     } catch (e) {
       next(e);
@@ -62,7 +60,7 @@ class ArticleController extends Controller {
       const { title, content, image } = body;
       const result = await this.service.insert({ title, content, image });
       if (result) {
-        return res.redirect("/cpanel/homes");
+        return res.redirect("/cpanel/articles");
       } else {
         return res.redirect("add-article");
       }
@@ -75,10 +73,18 @@ class ArticleController extends Controller {
   async update(req, res, next) {
     try {
       const { id } = req.params;
-      const { title, content, image } = req.body;
-      const response = await this.service.update(id, { title, content, image });
-      return await res.status(response.statusCode).json(response);
+      let { body, file } = req;
+      if (file) {
+        file = `http://${config.IPCONFIGHOME}:${config.PORT}/images/${file.filename}`;
+        body = { ...body, image: file };
+      }
+      const response = await this.service.update(id, body);
+      if (response.data.updated) {
+        return res.redirect("/cpanel/articles/");
+      }
+      return res.redirect(`/cpanel/articles/${id}`);
     } catch (e) {
+      console.log(">>>>Errr", e);
       next(e);
     }
   }

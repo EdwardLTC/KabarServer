@@ -17,7 +17,7 @@ router.post("/add-article",[UploadImage.single("image")],ArticleController.inser
 
 router.get("/:id/detail", ArticleController.getById);
 
-router.put("/:id/update", ArticleController.update);
+router.post("/:id/update",[UploadImage.single("image")], ArticleController.update);
 
 
 // router.get("/search", ArticleController.getByTitle);
