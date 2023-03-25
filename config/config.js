@@ -17,7 +17,10 @@ module.exports.getConfig = () => {
     GOOGLE_SCOPE: [],
     COOKIE_TOKEN_LIFETIME: 30 * 24 * 60 * 60 * 1000, // 60 MINUTES IN NANO SECOND
     JWT_TOKEN_LIFETIME: 30 * 24 * 60 * 60, // 60 MINUTES IN SECOND
-    IPCONFIGSCHOOL : "172.16.101.180",
+
+    //ipconfig
+    IPCONFIGSCHOOL: "172.16.101.180",
+    IPCONFIGHOME: "192.168.0.141",
   };
 
   // Modify for Production
@@ -29,6 +32,5 @@ module.exports.getConfig = () => {
   }
   config.GOOGLE_REDIRECT_URL = `${config.HOST}/cpanel/home/auth_callback`;
 
- 
   return config;
 };

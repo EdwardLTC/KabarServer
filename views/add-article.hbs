@@ -13,7 +13,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mx-auto h-100">
           <li class="nav-item">
-            <a class="nav-link" href="/cpanel/homes/">
+            <a class="nav-link" href="/cpanel/articles/">
               <i class="fas fa-tachometer-alt"></i> Dashboard
               <span class="sr-only">(current)</span>
             </a>
@@ -94,28 +94,21 @@
               </div>
               <div class="custom-file mt-3 mb-3">
                 <label for="fileInput" class="btn btn-primary btn-block mx-auto" >UPLOAD ARTICLE IMAGE</label>
+                <input id="fileInput" type="file" class="btn btn-primary btn-block mx-auto" value="UPLOAD ARTICLE IMAGE"
+                name="image" style="visibility:hidden;"/>
               </div>
             </div>
             <div class="col-12">
               <button type="submit" class="btn btn-primary btn-block text-uppercase">Add Article Now</button>
             </div>
           </div>
-           <input id="fileInput" type="file" class="btn btn-primary btn-block mx-auto" value="UPLOAD ARTICLE IMAGE"
-                  onclick="document.getElementById('fileInput').click();"  name="image" style="opacity: 0; position:absolute"/>
           </form>
         </div>
       </div>
     </div>
   </div>
   </div>
-  <footer class="tm-footer row tm-mt-small">
-    <div class="col-12 font-weight-light">
-      <p class="text-center text-white mb-0 px-4 small">
-        Copyright &copy; <b>2018</b> All rights reserved.
-        Design: <a rel="nofollow noopener" href="https://templatemo.com" class="tm-footer-link">Template Mo</a>
-      </p>
-    </div>
-  </footer>
+
   <script>
     var icon = document.getElementById('icon');
     fileInput.onchange = evt => {

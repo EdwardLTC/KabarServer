@@ -34,8 +34,10 @@ class ArticleController extends Controller {
   async getById(req, res, next) {
     try {
       const { id } = req.params;
+      console.log("id", id)
       const response = await this.service.getById(id);
-      return await res.status(response.statusCode).json(response);
+      console.log("response", response.data);
+      return res.render("detail-article", { article: response.data });
     } catch (e) {
       next(e);
     }
@@ -54,7 +56,7 @@ class ArticleController extends Controller {
     try {
       let { body, file } = req;
       if (file) {
-        file = `http://${config.IPCONFIGSCHOOL}:${config.PORT}/images/${file.filename}`;
+        file = `http://${config.IPCONFIGHOME}:${config.PORT}/images/${file.filename}`;
         body = { ...body, image: file };
       }
       const { title, content, image } = body;

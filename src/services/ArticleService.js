@@ -65,11 +65,17 @@ class ArticleService extends Service {
   }
 
   async getById(id) {
+    // try {
+    //   let res = await this.model.find({ _id: id });
+    //   return new HttpResponse(res);
+    // } catch (error) {
+    //   throw error;
+    // }
     try {
-      let res = await this.model.find({ _id: id });
+      let res = ListArticle.filter((item) => item._id == id);
       return new HttpResponse(res);
     } catch (error) {
-      throw error;
+        throw error;
     }
   }
 
@@ -155,6 +161,14 @@ class ArticleService extends Service {
       console.log(">>>>> error", error);
       throw error;
     }
+  }
+
+  async update(id, article) {
+      try {
+        
+      } catch (error) {
+        
+      }
   }
 }
 

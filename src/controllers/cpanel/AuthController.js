@@ -22,7 +22,7 @@ class AuthController {
         req.body.password
       );
       if (response) {
-        res.redirect("/cpanel/homes");
+        res.redirect("/cpanel/articles/");
       } else {
         res.redirect("login");
       }
