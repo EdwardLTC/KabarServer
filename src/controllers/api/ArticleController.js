@@ -1,6 +1,6 @@
-const { Controller } = require("../../system/controllers/Controller");
-const { ArticleService } = require("../services/ArticleService");
-const { Article } = require("../models/Article");
+const { Controller } = require("../../../system/controllers/Controller");
+const { ArticleService } = require("../../services/ArticleService");
+const { Article } = require("../../models/Article");
 const autoBind = require("auto-bind");
 const articleService = new ArticleService(new Article().getInstance());
 
@@ -9,6 +9,7 @@ class ArticleController extends Controller {
     super(service);
     autoBind(this);
   }
+
   async getByAuthor(req, res, next) {
     try {
       const { _id } = req.user;
@@ -18,6 +19,7 @@ class ArticleController extends Controller {
       next(e);
     }
   }
+
   async getByTitle(req, res, next) {
     try {
       const { title } = req.query;
@@ -27,6 +29,7 @@ class ArticleController extends Controller {
       next(e);
     }
   }
+
   async getById(req, res, next) {
     try {
       const { id } = req.params;
@@ -36,15 +39,15 @@ class ArticleController extends Controller {
       next(e);
     }
   }
+
   async getAll(req, res, next) {
     try {
-      const response = await this.service.getAll();
-      //   return await res.status(response.statusCode).json(response);
-      return response;
+      return await res.status(response.statusCode).json(response);
     } catch (e) {
-      // next(e);
+      next(e);
     }
   }
+
   async insert(req, res, next) {
     try {
       const { _id } = req.user;
@@ -54,13 +57,14 @@ class ArticleController extends Controller {
         content,
         image,
         createdAt: new Date(),
-        createdBy: _id,
+        createdBy: 1,
       });
       return await res.status(response.statusCode).json(response);
     } catch (e) {
       next(e);
     }
   }
+
   async update(req, res, next) {
     try {
       const { id } = req.params;
@@ -71,18 +75,14 @@ class ArticleController extends Controller {
       next(e);
     }
   }
+
   async delete(req, res, next) {
-    // try {
-    //   const { id } = req.params;
-    //   const response = await this.service.delete(id);
-    //   return await res.status(response.statusCode).json(response);
-    // } catch (e) {
-    //   next(e);
-    // }
     try {
-      return await this.service.delete(req.params.id);
-    } catch (error) {
-      throw error;
+      const { id } = req.params;
+      const response = await this.service.delete(id);
+      return await res.status(response.statusCode).json(response);
+    } catch (e) {
+      next(e);
     }
   }
 }

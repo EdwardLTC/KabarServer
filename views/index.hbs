@@ -2,7 +2,7 @@
   <div class="" id="home">
     <nav class="navbar navbar-expand-xl">
       <div class="container h-100">
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand">
           <h1 class="tm-site-title mb-0">Product Admin</h1>
         </a>
         <button
@@ -50,7 +50,7 @@
               </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="products.html">
+              <a class="nav-link" href="/cpanel/articles/add-article">
                 <i class="fas fa-shopping-cart"></i>
                 Products
               </a>
@@ -129,7 +129,9 @@
                     <div class="tm-status-circle moving">
                     </div>{{this.title}}
                   </td>
-                  <td><b>{{this.image}}</b></td>
+                  <td><b>
+                    <img src="{{this.image}}" alt="" style="width: 100px; height: 100px;" class="rounded">
+                  </b></td>
                   <td><b>{{this.createdAt}}</b></td>
                   <td><b>{{this.createdBy}}</b></td>
                   <td><a class="font-weight" onclick="confirmDelete('{{this._id}}')">DELETE</a></td>

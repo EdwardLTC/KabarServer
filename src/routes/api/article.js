@@ -1,8 +1,8 @@
 'use strict';
-const ArticleController = require('../../controllers/ArticleController');
+const ArticleController = require('../../controllers/api/ArticleController');
 const express = require('express'),
     router = express.Router();
-const AuthController = require('../../controllers/AuthController');
+const AuthController = require('../../controllers/api/AuthController');
 
 router.get('/search', AuthController.checkLogin, ArticleController.getByTitle);
 router.get('/', AuthController.checkLogin, ArticleController.getAll);

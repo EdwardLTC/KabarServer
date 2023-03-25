@@ -1,11 +1,11 @@
-const { Controller } = require('../../system/controllers/Controller');
-const { MediaService } = require('./../services/MediaService');
-const { Media } = require('./../models/Media');
+const { Controller } = require('../../../system/controllers/Controller');
+const { MediaService } = require('./../../services/MediaService');
+const { Media } = require('./../../models/Media');
 const autoBind = require('auto-bind');
 const multer = require('multer');
 const fs = require('fs');
-const utils = require('../../system/helpers/Utility'),
-    config = require('../../config/config').getConfig(),
+const utils = require('../../../system/helpers/Utility'),
+    config = require('../../../config/config').getConfig(),
     mediaService = new MediaService(
         new Media().getInstance()
     );

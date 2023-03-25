@@ -1,6 +1,6 @@
-const { AuthService } = require("./../services/AuthService");
-const { Auth } = require("./../models/Auth");
-const { User } = require("./../models/User");
+const { AuthService } = require("./../../services/AuthService");
+const { Auth } = require("./../../models/Auth");
+const { User } = require("./../../models/User");
 const autoBind = require("auto-bind");
 const bcrypt = require("bcrypt"),
   SALT_WORK_FACTOR = 10,
@@ -16,20 +16,25 @@ class AuthController {
   }
 
   async login(req, res, next) {
-    // try {
-    //   const response = await this.service.login(
-    //     req.body.email,
-    //     req.body.password
-    //   );
-    //   await res.status(response.statusCode).json(response);
-    // } catch (e) {
-    //   next(e);
-    // }
     try {
-      return await this.service.login(req.body.username, req.body.password);
-    } catch (e) {
-      throw e;
+      const response = await this.service.login(
+        req.body.username,
+        req.body.password
+      );
+      if (response) {
+        res.redirect("/cpanel/homes");
+      } else {
+        res.redirect("login");
+      }
+    } catch (error) {
+      res.redirect("login");
     }
+
+    // try {
+    //   return await this.service.login(req.body.username, req.body.password);
+    // } catch (e) {
+    //   throw e;
+    // }
   }
 
   async logout(req, res, next) {

@@ -1,5 +1,5 @@
 'use strict';
-const MediaController = require( '../../controllers/MediaController' );
+const MediaController = require( '../../controllers/api/MediaController' );
 const express = require( 'express' ),
     router = express.Router();
 const multer  = require('multer');

@@ -131,6 +131,31 @@ class ArticleService extends Service {
       throw error;
     }
   }
+
+  async insert(article) {
+    // try {
+    //   let res = await this.model.create(article);
+    //   return new HttpResponse(res);
+    // } catch (error) {
+    //   throw error;
+    // }
+
+    try {
+      const tmp = {
+        _id: ListArticle.length + 1,
+        title: article.title,
+        content: article.content,
+        image: article.image,
+        createdAt: new Date(),
+        createdBy: 1, //article.createdBy
+      };
+      ListArticle.push(tmp);
+      return true;
+    } catch (error) {
+      console.log(">>>>> error", error);
+      throw error;
+    }
+  }
 }
 
 module.exports = { ArticleService };

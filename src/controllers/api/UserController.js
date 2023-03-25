@@ -1,6 +1,6 @@
-const { Controller } = require('../../system/controllers/Controller');
-const { UserService } = require('../services/UserService');
-const { User } = require('../models/User');
+const { Controller } = require('../../../system/controllers/Controller');
+const { UserService } = require('../../services/UserService');
+const { User } = require('../../models/User');
 const autoBind = require('auto-bind');
 const userService = new UserService(new User().getInstance());
 const bcrypt = require('bcrypt'), SALT_WORK_FACTOR = 10;
