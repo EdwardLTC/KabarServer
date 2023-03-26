@@ -72,8 +72,9 @@ class ArticleService extends Service {
     //   throw error;
     // }
     try {
-      let res = ListArticle.filter((item) => item._id == id);
-      return new HttpResponse(res[0]);
+      let res = ListArticle.find((item) => item._id.toString() == id.toString());
+      console.log(res);
+      return new HttpResponse(res);
     } catch (error) {
       throw error;
     }
@@ -132,6 +133,7 @@ class ArticleService extends Service {
         // The item was not found in the array, so return false
         return false;
       }
+      
     } catch (error) {
       console.log(">>>>> error", error);
       throw error;
