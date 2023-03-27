@@ -60,9 +60,15 @@ class AuthService {
       const user = listUser.find(
         (item) => item.username === email && item.password === password
       );
-      return user ? user : null;
+      if (user) {
+        return new HttpResponse(user);
+      } else {
+        const error = new Error("Invalid Email");
+        error.statusCode = 422;
+
+        throw error;
+      }
     } catch (error) {
-      console.log("Error", error);
       throw e;
     }
   }

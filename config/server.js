@@ -8,19 +8,17 @@ const utility = require("../system/helpers/Utility");
 const helmet = require("helmet"),
   server = express();
 const { setRoutes } = require("./routes");
-// For security
+const session = require("express-session");
 
-// server.use( helmet() );
-// server.use(
-//     helmet.contentSecurityPolicy({
-//       useDefaults: true,
-//       directives: {
-//         "script-src": ["'self'", "'unsafe-inline'"],
-//         "script-src-attr": ["'unsafe-inline'"],
-//         "img-src": ["'self'", "2.pik.vn"],
-//       },
-//     })
-//   );
+server.use(
+  session({
+    secret: "iloveyou",
+    resave: true,
+    saveUninitialized: true,
+    cookie: { secure: false },
+  })
+);
+
 server.use(logger("dev"));
 server.use(express.json());
 server.use(express.urlencoded({ extended: true }));

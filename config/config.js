@@ -5,10 +5,11 @@ module.exports.getConfig = () => {
   const config = {
     MODE: "Development",
     PORT: process.env.PORT || 3000,
-    MONGO_URL: "mongodb+srv://EdwardLTC:admin123@cluster0.e8c4z0e.mongodb.net/?retryWrites=true&w=majority",
+    // MONGO_URL: "mongodb+srv://EdwardLTC:admin123@cluster0.e8c4z0e.mongodb.net/?retryWrites=true&w=majority",
+    MONGO_URL: "",
     UPLOAD_PATH: path.resolve(`${__dirname}/../public/uploads`),
     UPLOAD_2PIK_PATH: "https://2.pik.vn/",
-    JWT_SECRET: "",
+    JWT_SECRET: "HEHEHHHEHEHEHHEHE",
     FPT_MAIL_ADMIN: "",
     GOOGLE_CLIENT_ID: "",
     GOOGLE_PROJECT_ID: "",

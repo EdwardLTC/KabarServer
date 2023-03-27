@@ -2,6 +2,9 @@ const { AuthService } = require("./../../services/AuthService");
 const { Auth } = require("./../../models/Auth");
 const { User } = require("./../../models/User");
 const autoBind = require("auto-bind");
+const jwt = require("jsonwebtoken");
+const config = require("../../../config/config").getConfig();
+
 const bcrypt = require("bcrypt"),
   SALT_WORK_FACTOR = 10,
   authService = new AuthService(
@@ -30,6 +33,10 @@ class AuthController {
         req.body.password
       );
       if (response) {
+        const token = jwt.sign({ id: 1, name: "abc" }, config.JWT_SECRET, {
+          expiresIn: config.JWT_TOKEN_LIFETIME,
+        });
+        req.session.token = token;
         res.redirect("/cpanel/articles/");
       } else {
         res.redirect("login");
@@ -46,9 +53,15 @@ class AuthController {
   }
 
   async logout(req, res, next) {
+    // try {
+    //   const response = await this.service.logout(req.token);
+    //   await res.status(response.statusCode).json(response);
+    // } catch (e) {
+    //   next(e);
+    // }
     try {
-      const response = await this.service.logout(req.token);
-      await res.status(response.statusCode).json(response);
+      req.session.destroy();
+      res.redirect("login");
     } catch (e) {
       next(e);
     }

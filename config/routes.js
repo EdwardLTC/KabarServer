@@ -9,13 +9,11 @@ module.exports.setRoutes = (app) => {
    */
 
   /**
-   * app.get("/", (req, res) => {
-   *  res.send("Welcome to the APP");
-   *});*/
-
-  /**
    * API Route.
    * All the API will start with "/api/[MODULE_ROUTE]"
+   * 
+   * Cpanel Route.
+   * All the Cpanel will start with "/cpanel/[MODULE_ROUTE]"
    */
   app.use("/api", apiRoutes);
   app.use("/cpanel", cpanelRpoutes);
