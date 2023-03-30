@@ -2,6 +2,7 @@
 const { Service } = require("../../system/services/Service");
 const { HttpResponse } = require("../../system/helpers/HttpResponse");
 const autoBind = require("auto-bind");
+const { Article } = require("../models/Article");
 
 var ListArticle = [
   {
@@ -65,15 +66,8 @@ class ArticleService extends Service {
   }
 
   async getById(id) {
-    // try {
-    //   let res = await this.model.find({ _id: id });
-    //   return new HttpResponse(res);
-    // } catch (error) {
-    //   throw error;
-    // }
     try {
-      let res = ListArticle.find((item) => item._id.toString() == id.toString());
-      console.log(res);
+      let res = await this.model.find({ _id: id });
       return new HttpResponse(res);
     } catch (error) {
       throw error;
@@ -92,98 +86,58 @@ class ArticleService extends Service {
   }
 
   async getAll() {
-    // try {
-    //   let res = await this.model
-    //     .find()
-    //     .sort({ createdAt: -1 })
-    //     .skip(0)
-    //     .limit(30)
-    //     .populate({
-    //       path: "createdBy",
-    //       select: "name avatar _id",
-    //     });
-    //   return new HttpResponse(res);
-    // } catch (error) {
-    //   throw error;
-    // }
-
     try {
-      return new HttpResponse(ListArticle);
+      let res = await this.model
+        .find()
+        .sort({ createdAt: -1 })
+        .skip(0)
+        .populate({
+          path: "createdBy",
+          select: "name avatar _id",
+        });
+      return new HttpResponse(res);
     } catch (error) {
       throw error;
     }
   }
 
   async delete(id) {
-    // try {
-    //   let res = await this.model.findByIdAndDelete(id);
-    //   return new HttpResponse(res);
-    // } catch (error) {
-    //   throw error;
-    // }
     try {
-      const tmp = ListArticle.filter(
-        (item) => item._id.toString() != id.toString()
-      );
-
-      if (tmp.length !== ListArticle.length) {
-        ListArticle = tmp;
-        return true;
-      } else {
-        // The item was not found in the array, so return false
-        return false;
-      }
-      
+      let res = await this.model.findByIdAndDelete(id);
+      return new HttpResponse(res);
     } catch (error) {
-      console.log(">>>>> error", error);
       throw error;
     }
   }
 
   async insert(article) {
-    // try {
-    //   let res = await this.model.create(article);
-    //   return new HttpResponse(res);
-    // } catch (error) {
-    //   throw error;
-    // }
-
     try {
-      const tmp = {
-        _id: ListArticle.length + 1,
-        title: article.title,
-        content: article.content,
-        image: article.image,
-        createdAt: new Date(),
-        createdBy: 1, //article.createdBy
-      };
-      ListArticle.push(tmp);
-      return true;
-    } catch (error) {
-      console.log(">>>>> error", error);
-      throw error;
-    }
-  }
-
-  async update(id, article) {
-    try {
-      let index = ListArticle.findIndex(
-        (item) => item._id.toString() == id.toString()
-      );
-      if (index >= 0) {
-        ListArticle[index].title = article.title;
-        ListArticle[index].content = article.content;
-        if (article.image) {
-          ListArticle[index].image = article.image;
-        }
-        return new HttpResponse({ updated: true, article: ListArticle[index] });
-      } else {
-        return new HttpResponse({ updated: false, article: {} });
-      }
+      let res = await this.model.create(article);
+      return new HttpResponse(res);
     } catch (error) {
       throw error;
     }
   }
+
+  // async update(id, article) {
+  //   try { 
+  //     let index = ListArticle.findIndex(
+  //       (item) => item._id.toString() == id.toString()
+  //     );
+  //     if (index >= 0) {
+  //       ListArticle[index].title = article.title;
+  //       ListArticle[index].content = article.content;
+  //       if (article.image) {
+  //         ListArticle[index].image = article.image;
+  //       }
+  //       return new HttpResponse({ updated: true, article: ListArticle[index] });
+  //     } else {
+  //       return new HttpResponse({ updated: false, article: {} });
+  //     }
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 }
 
 module.exports = { ArticleService };

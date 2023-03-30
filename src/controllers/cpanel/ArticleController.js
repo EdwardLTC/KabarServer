@@ -19,7 +19,6 @@ class ArticleController extends Controller {
     }
   }
 
-  
   async getByAuthor(req, res, next) {
     try {
       const { _id } = req.user;
@@ -44,8 +43,10 @@ class ArticleController extends Controller {
     try {
       const { id } = req.params;
       const response = await this.service.getById(id);
-      return res.render("detail-article", { article: response.data });
+      console.log(response.data);
+      return res.render("detail-article", { article: response.data[0] });
     } catch (e) {
+      console.log("error", e);
       next(e);
     }
   }
@@ -68,7 +69,7 @@ class ArticleController extends Controller {
       }
       const { title, content, image } = body;
       const result = await this.service.insert({ title, content, image });
-      if (result) {
+      if (result.statusCode === 200) {
         return res.redirect("/cpanel/articles");
       } else {
         return res.redirect("add-article");
@@ -101,10 +102,10 @@ class ArticleController extends Controller {
   async delete(req, res, next) {
     try {
       const { id } = req.params;
-      const response = await await this.service.delete(id);
-      return res.json({ response });
-    } catch (error) {
-      return res.json({ response: false });
+      const response = await this.service.delete(id);
+      return await res.status(response.statusCode).json(response);
+    } catch (e) {
+      next(e);
     }
   }
 }

@@ -57,7 +57,7 @@ class ArticleController extends Controller {
         content,
         image,
         createdAt: new Date(),
-        createdBy: 1,
+        createdBy: _id,
       });
       return await res.status(response.statusCode).json(response);
     } catch (e) {

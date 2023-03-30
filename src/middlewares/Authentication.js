@@ -2,10 +2,9 @@ const jwt = require("jsonwebtoken");
 const config = require("../../config/config").getConfig();
 
 const checkTokens = (req, res, next) => {
-  const { section } = req;
+  const { session } = req;
   const url = req.originalUrl.toLowerCase();
-
-  if (!section) {
+  if (!session) {
     if (url.includes("/cpanel/auth/login")) {
       return next();
     } else {
@@ -23,7 +22,7 @@ const checkTokens = (req, res, next) => {
       jwt.verify(token, config.JWT_SECRET, (err, decoded) => {
         if (err) {
           if (url.includes("/cpanel/auth/login")) {
-            next();
+            return next();
           } else {
             return res.redirect("/cpanel/auth/login");
           }
@@ -39,6 +38,4 @@ const checkTokens = (req, res, next) => {
   }
 };
 
-const checkTokenWeb = (req, res, next) => {};
-
-module.exports = { checkTokens, checkTokenWeb };
+module.exports = { checkTokens };
