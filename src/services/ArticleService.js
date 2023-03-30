@@ -119,25 +119,6 @@ class ArticleService extends Service {
     }
   }
 
-  // async update(id, article) {
-  //   try { 
-  //     let index = ListArticle.findIndex(
-  //       (item) => item._id.toString() == id.toString()
-  //     );
-  //     if (index >= 0) {
-  //       ListArticle[index].title = article.title;
-  //       ListArticle[index].content = article.content;
-  //       if (article.image) {
-  //         ListArticle[index].image = article.image;
-  //       }
-  //       return new HttpResponse({ updated: true, article: ListArticle[index] });
-  //     } else {
-  //       return new HttpResponse({ updated: false, article: {} });
-  //     }
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
 }
 
 module.exports = { ArticleService };

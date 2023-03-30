@@ -37,6 +37,7 @@ class AuthService {
       try {
         // Check Password
         const passwordMatched = await user.comparePassword(password);
+       
         if (!passwordMatched) {
           const error = new Error("Invalid Password");
           error.statusCode = 422;

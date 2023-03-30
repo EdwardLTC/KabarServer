@@ -67,7 +67,6 @@ class Service {
   async insert(data) {
     try {
       const item = await this.model.create(data);
-
       if (item) {
         return new HttpResponse(item);
       }

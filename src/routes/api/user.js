@@ -4,6 +4,7 @@ const express = require("express"),
   router = express.Router();
 const AuthController = require("../../controllers/api/AuthController");
 
+// http://localhost:3000/api/users/register
 router.post("/register", UserController.register);
 
 router.post(

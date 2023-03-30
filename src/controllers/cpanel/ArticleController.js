@@ -64,7 +64,7 @@ class ArticleController extends Controller {
     try {
       let { body, file } = req;
       if (file) {
-        file = `http://${config.IPCONFIGHOME}:${config.PORT}/images/${file.filename}`;
+        file = `http://${config.IPCONFIGSCHOOL}:${config.PORT}/images/${file.filename}`;
         body = { ...body, image: file };
       }
       const { title, content, image } = body;

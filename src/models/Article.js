@@ -15,15 +15,15 @@ class Article {
       },
       image: {
         type: String,
-        // required: true,
+        required: true,
       },
       createdAt: {
         type: Date,
-        // required: true,
+        required: true,
       },
       createdBy: {
         type: Schema.Types.ObjectId,
-        // required: true,
+        required: true,
         ref: "user",
       },
     });
