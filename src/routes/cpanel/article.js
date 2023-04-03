@@ -6,7 +6,7 @@ const { checkTokens } = require("../../middlewares/Authentication");
 
 //http://localhost:3000/cpanel/articles
 
-router.get("/",[checkTokens], ArticleController.getAll);
+router.get("/", checkTokens, ArticleController.getAll);
 
 router.delete("/:id/delete", ArticleController.delete);
 
@@ -18,16 +18,12 @@ router.post(
   ArticleController.insert
 );
 
-router.get("/:id/detail", [checkTokens], ArticleController.getById);
+router.get("/:id/detail", checkTokens, ArticleController.getById);
 
 router.post(
   "/:id/update",
   [checkTokens, UploadImage.single("image")],
   ArticleController.update
 );
-
-// router.get("/search", ArticleController.getByTitle);
-
-// router.get("/my-articles", ArticleController.getByAuthor);
 
 module.exports = router;

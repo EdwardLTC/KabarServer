@@ -3,15 +3,6 @@ const { UserService } = require("./UserService");
 const autoBind = require("auto-bind");
 const { HttpResponse } = require("../../system/helpers/HttpResponse");
 const mongoose = require("mongoose");
-
-const listUser = [
-  {
-    _id: "5e9b9b9b9b9b9b9b9b9b9b9b",
-    username: "admin",
-    password: "123",
-  },
-];
-
 class AuthService {
   constructor(model, userModel) {
     this.model = model;
@@ -37,7 +28,6 @@ class AuthService {
       try {
         // Check Password
         const passwordMatched = await user.comparePassword(password);
-       
         if (!passwordMatched) {
           const error = new Error("Invalid Password");
           error.statusCode = 422;
@@ -56,22 +46,6 @@ class AuthService {
         throw e;
       }
     }
-
-    // try {
-    //   const user = listUser.find(
-    //     (item) => item.username === email && item.password === password
-    //   );
-    //   if (user) {
-    //     return new HttpResponse(user);
-    //   } else {
-    //     const error = new Error("Invalid Email");
-    //     error.statusCode = 422;
-
-    //     throw error;
-    //   }
-    // } catch (error) {
-    //   throw e;
-    // }
   }
 
   async logout(token) {

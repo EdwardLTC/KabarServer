@@ -1,5 +1,5 @@
 const express = require("express");
-// const bodyParser = require( 'body-parser' );
+const bodyParser = require("body-parser");
 const logger = require("morgan");
 const path = require("path");
 const cookieParser = require("cookie-parser");
@@ -42,7 +42,7 @@ const cors = require("cors"),
 
 server.use(cors(corsOptions));
 
-// server.use( bodyParser.json() );
+server.use(bodyParser.json());
 
 // Setting up Routes
 setRoutes(server);

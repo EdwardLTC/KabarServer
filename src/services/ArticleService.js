@@ -4,49 +4,6 @@ const { HttpResponse } = require("../../system/helpers/HttpResponse");
 const autoBind = require("auto-bind");
 const { Article } = require("../models/Article");
 
-var ListArticle = [
-  {
-    _id: 1,
-    title: "Article 1",
-    content: "Content 1",
-    image: "https://picsum.photos/200/300",
-    createdAt: "2021-05-01T00:00:00.000Z",
-    createdBy: 1,
-  },
-  {
-    _id: 2,
-    title: "Article 2",
-    content: "Content 2",
-    image: "https://picsum.photos/200/300",
-    createdAt: "2021-05-01T00:00:00.000Z",
-    createdBy: 2,
-  },
-  {
-    _id: 3,
-    title: "Article 3",
-    content: "Content 3",
-    image: "https://picsum.photos/200/300",
-    createdAt: "2021-05-01T00:00:00.000Z",
-    createdBy: 3,
-  },
-  {
-    _id: 4,
-    title: "Article 4",
-    content: "Content 4",
-    image: "https://picsum.photos/200/300",
-    createdAt: "2021-05-01T00:00:00.000Z",
-    createdBy: 4,
-  },
-  {
-    _id: 5,
-    title: "Article 5",
-    content: "Content 5",
-    image: "https://picsum.photos/200/300",
-    createdAt: "2021-05-01T00:00:00.000Z",
-    createdBy: 5,
-  },
-];
-
 class ArticleService extends Service {
   constructor(model) {
     super(model);
@@ -118,7 +75,6 @@ class ArticleService extends Service {
       throw error;
     }
   }
-
 }
 
 module.exports = { ArticleService };

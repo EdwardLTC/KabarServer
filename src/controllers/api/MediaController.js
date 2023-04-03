@@ -49,7 +49,6 @@ class MediaController extends Controller {
     try {
       req.file.path = config.HOST + "/uploads/" + req.file.filename;
       const response = await this.service.insert(req.file);
-
       return res.status(response.statusCode).json(response);
     } catch (e) {
       console.log(">>>>>>>upload error", e);
@@ -87,39 +86,6 @@ class MediaController extends Controller {
         });
       }
       return res.status(response.statusCode).json(response);
-    } catch (e) {
-      next(e);
-    }
-  }
-
-  async insert2Pik(req, res, next) {
-    try {
-      // const { image } = req.body
-      // const option = {
-      //     method: 'post',
-      //     formData: { 'image': image },
-      //     url: config.UPLOAD_2PIK_PATH,
-      //     headers: {"Content-Type": "multipart/form-data"},
-      // }
-      // request(option, (err, response, body) => {
-      //     if (err) console.log('error: ', err);
-      //     console.log(body);
-      //     let data = JSON.parse(body);
-      //     console.log(data);
-      //     if(data.saved == false){
-      //         res.status(400).json({saved: false});
-      //     }
-      //     else {
-      //         res.status(200).json({saved: `${config.UPLOAD_2PIK_PATH}${data.saved}`});
-      //     }
-      // });
-      res
-        .status(200)
-        .json({
-          saved: `${
-            config.UPLOAD_2PIK_PATH
-          }${"2022e8b1ad87-2e98-44bb-9d7f-4504b2d186da.jpg"}`,
-        });
     } catch (e) {
       next(e);
     }

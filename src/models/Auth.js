@@ -51,7 +51,7 @@ class Auth {
     schema.statics.decodeToken = async function (token) {
       // Create a new token with the user details
       try {
-        return await jwt.verify(token, jwtKey);
+        return jwt.verify(token, jwtKey);
       } catch (e) {
         throw e;
       }

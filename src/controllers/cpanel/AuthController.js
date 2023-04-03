@@ -44,21 +44,9 @@ class AuthController {
     } catch (error) {
       res.redirect("login");
     }
-
-    // try {
-    //   return await this.service.login(req.body.username, req.body.password);
-    // } catch (e) {
-    //   throw e;
-    // }
   }
 
   async logout(req, res, next) {
-    // try {
-    //   const response = await this.service.logout(req.token);
-    //   await res.status(response.statusCode).json(response);
-    // } catch (e) {
-    //   next(e);
-    // }
     try {
       req.session.destroy();
       res.redirect("login");
