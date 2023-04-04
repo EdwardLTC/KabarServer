@@ -42,6 +42,7 @@ class ArticleController extends Controller {
 
   async getAll(req, res, next) {
     try {
+      const response = await this.service.getAll();
       return await res.status(response.statusCode).json(response);
     } catch (e) {
       next(e);

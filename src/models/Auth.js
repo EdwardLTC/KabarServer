@@ -19,9 +19,17 @@ class Auth {
           required: true,
           ref: "user",
         },
+        // expiry: {
+        //   type: Date,
+        //   default: Date.now() + jwtExpirySeconds, // jwt expiry time
+        //   default: Date.now() + 10000, // 10 seconds
+        //   required: false,
+        // },
       },
       { timestamps: true }
     );
+
+    // schema.index({ expiry: 1 }, { expireAfterSeconds: 0 });
 
     schema.statics.generateToken = async function (user) {
       // Create a new token with the user details
@@ -56,6 +64,7 @@ class Auth {
         throw e;
       }
     };
+
     try {
       mongoose.model("auth", schema);
     } catch (e) {}

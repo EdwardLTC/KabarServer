@@ -61,6 +61,9 @@ class AuthController {
     } else if (req.cookies && req.cookies.token) {
       return req.cookies.token;
     }
+    if (req.session && req.session.token) {
+      return req.session.token;
+    }
     return null;
   }
 }

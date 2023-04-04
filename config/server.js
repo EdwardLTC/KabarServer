@@ -1,12 +1,11 @@
 const express = require("express");
-const bodyParser = require("body-parser");
 const logger = require("morgan");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const hbs = require("hbs");
 const utility = require("../system/helpers/Utility");
-const helmet = require("helmet"),
-  server = express();
+// const helmet = require("helmet");
+const server = express();
 const { setRoutes } = require("./routes");
 const session = require("express-session");
 
@@ -41,8 +40,6 @@ const cors = require("cors"),
   };
 
 server.use(cors(corsOptions));
-
-server.use(bodyParser.json());
 
 // Setting up Routes
 setRoutes(server);

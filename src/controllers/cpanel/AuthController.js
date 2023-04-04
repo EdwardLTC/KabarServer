@@ -33,10 +33,7 @@ class AuthController {
         req.body.password
       );
       if (response) {
-        const token = jwt.sign({ id: 1, name: "abc" }, config.JWT_SECRET, {
-          expiresIn: config.JWT_TOKEN_LIFETIME,
-        });
-        req.session.token = token;
+        req.session.token = response.data.token;
         res.redirect("/cpanel/articles/");
       } else {
         res.redirect("login");

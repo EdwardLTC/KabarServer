@@ -2,6 +2,7 @@ const { Controller } = require("../../../system/controllers/Controller");
 const { ArticleService } = require("../../services/ArticleService");
 const { Article } = require("../../models/Article");
 const autoBind = require("auto-bind");
+const MediaController = require("./MediaController");
 const articleService = new ArticleService(new Article().getInstance());
 const config = require("../../../config/config").getConfig();
 
@@ -43,7 +44,6 @@ class ArticleController extends Controller {
     try {
       const { id } = req.params;
       const response = await this.service.getById(id);
-      console.log(response.data);
       return res.render("detail-article", { article: response.data[0] });
     } catch (e) {
       console.log("error", e);
@@ -62,13 +62,19 @@ class ArticleController extends Controller {
 
   async insert(req, res, next) {
     try {
-      let { body, file } = req;
-      if (file) {
-        file = `http://${config.IPCONFIGSCHOOL}:${config.PORT}/images/${file.filename}`;
-        body = { ...body, image: file };
-      }
-      const { title, content, image } = body;
-      const result = await this.service.insert({ title, content, image });
+      const response = await MediaController.insert(req, res, next);
+      const image = response.data.path;
+      const { title, content } = req.body;
+      const { _id } = req.user;
+
+      const result = await this.service.insert({
+        title,
+        content,
+        image,
+        createdAt: new Date(),
+        createdBy: _id,
+      });
+
       if (result.statusCode === 200) {
         return res.redirect("/cpanel/articles");
       } else {
@@ -85,11 +91,13 @@ class ArticleController extends Controller {
       const { id } = req.params;
       let { body, file } = req;
       if (file) {
-        file = `http://${config.IPCONFIGHOME}:${config.PORT}/images/${file.filename}`;
-        body = { ...body, image: file };
+        const response = await MediaController.insert(req, res, next);
+        const img = response.data.path;
+        body = { ...body, image: img };
       }
       const response = await this.service.update(id, body);
-      if (response.data.updated) {
+      console.log(">>>>", response);
+      if (response.statusCode === 200) {
         return res.redirect("/cpanel/articles/");
       }
       return res.redirect(`/cpanel/articles/${id}`);
