@@ -16,6 +16,7 @@ class ArticleService extends Service {
       let res = await this.model.find({
         title: { $regex: title.toLowerCase(), $options: "i" },
       });
+     
       return new HttpResponse(res);
     } catch (error) {
       throw error;

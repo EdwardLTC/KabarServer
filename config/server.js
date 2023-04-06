@@ -4,7 +4,6 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const hbs = require("hbs");
 const utility = require("../system/helpers/Utility");
-// const helmet = require("helmet");
 const server = express();
 const { setRoutes } = require("./routes");
 const session = require("express-session");

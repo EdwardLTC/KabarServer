@@ -2,6 +2,7 @@ const { Controller } = require("../../../system/controllers/Controller");
 const { UserService } = require("../../services/UserService");
 const { User } = require("../../models/User");
 const autoBind = require("auto-bind");
+const { HttpResponse } = require("../../../system/helpers/HttpResponse");
 const userService = new UserService(new User().getInstance());
 const bcrypt = require("bcrypt"),
   SALT_WORK_FACTOR = 10;
@@ -65,6 +66,27 @@ class UserController extends Controller {
       await res.status(response.statusCode).json(response);
     } catch (e) {
       next(e);
+    }
+  }
+
+  async sendMail(req, res, next) {
+    try {
+      const email = req.body.email;
+      const subject = "Authentication user";
+      const content = `<p>Click <a href="http://localhost:3000/user/confirm-account/${email}">here</a> to authentication your account</p>`;
+      const response = await this.service.sendMail(email, subject, content);
+      await res.status(200).json(new HttpResponse(response));
+    } catch (error) {
+      console.log(">>> send mail error", error);
+      next(error);
+    }
+  }
+
+  async confirmAccount(req, res, next) {
+    try {
+      
+    } catch (error) {
+      
     }
   }
 }
