@@ -48,7 +48,8 @@ class MediaController extends Controller {
 
   async insert(req, res, next) {
     try {
-      req.file.path = config.HOST + "/uploads/" + req.file.filename;
+      req.file.path = config.IPCONFIGHOME + "/uploads/" + req.file.filename;
+      console.log("req.file", req.file.path);
       const response = await this.service.insert(req.file);
       return response;
     } catch (e) {
