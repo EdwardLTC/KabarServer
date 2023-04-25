@@ -30,19 +30,6 @@ PATHS.forEach((module) => {
 });
 console.table(moduleMapper);
 
-router.get("/", (req, res) => {
-  // //res.json({ 'status': true, 'message': `Welcome to ${packageJson.name} V ${packageJson.version}` });
-  // const arr = Array.from({ length: 5 }, (_, index) => ({
-  //   ORDER: index.toString(),
-  //   STATUS: "HAHA",
-  //   OPERATORS: "Oliver Trag",
-  //   LOCATION: "London, UK",
-  //   DISTANCE: "485 km",
-  //   START_DATE: new Date(),
-  //   EST_DELIVERY_DUE: new Date(),
-  // }));
-  // res.render("index", { list: arr });
-});
 
 router.use("*", (req, res, next) => {
   // 404 handler

@@ -72,7 +72,7 @@ class User {
           if (err) {
             console.log(err);
             reject(err);
-          } else {  
+          } else {
             resolve(isMatch);
           }
         });
@@ -82,7 +82,7 @@ class User {
     schema.statics.findByEmail = function (email) {
       return this.findOne({ email: email });
     };
-    
+
     try {
       mongoose.model("user", schema);
     } catch (e) {}
